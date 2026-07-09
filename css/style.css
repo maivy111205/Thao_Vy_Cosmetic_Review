@@ -64,42 +64,32 @@ ROOT COLOR VARIABLE
 /*====================================================
                         TOPBAR
 ====================================================*/
-.topbar{
-    background: #35542d;
-    color: #fff;
-    font-size: 13px;
-    padding: 8px 0;
+.top-bar{
+    background:#35542d;
+    color:#fff;
+    overflow:hidden;
+    white-space:nowrap;
+    height:45px;
+    display:flex;
+    align-items:center;
 }
 
-.topbar .container{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.top-track{
+    display:inline-block;
+    padding-left:100%;
+    animation:topbarMove 18s linear infinite;
+    font-size:16px;
+    font-weight:600;
 }
 
-.topbar-right{
-    display: flex;
-    align-items: center;
-    gap: 45px;
+@keyframes topbarMove{
+    from{
+        transform:translateX(0);
+    }
+    to{
+        transform:translateX(-100%);
+    }
 }
-
-.topbar-right a:last-child{
-    margin-left: 0; /* Đã tối ưu hóa khoảng cách đồng bộ */
-}
-
-.topbar a{
-    color: #fff;
-    transition: .3s;
-}
-
-.topbar a:hover{
-    color: #d9f0b4;
-}
-
-.topbar i{
-    margin-right: 6px;
-}
-
 /*====================================================
                         HEADER
 ====================================================*/
@@ -439,29 +429,45 @@ ROOT COLOR VARIABLE
     margin-bottom: 10px;
 }
 
-.product-grid, .products-container {
+.product-grid, 
+.products-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns:  repeat(auto-fill, minmax(250px, 1fr));
     gap: 30px;
 }
 
-.product-card, .product-item {
-    background: #white;
+.product-card, 
+.product-item {
+    background:#fff;
     border-radius: 12px;
+	overflow: hidden;
     padding: 20px;
     position: relative;
-    box-shadow: 0 5px 15px rgba(0,0,0,.04);
+    box-shadow:0 4px 15px rgba(0,0,0,.08) ;
     transition: .3s ease;
     display: flex;
     flex-direction: column;
 }
 
-.product-card img, .product-item img {
+.product-card:hover,
+.product-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,.15);
+}
+
+.product-card img, 
+.product-item img {
     width: 100%;
-    height: 220px;
+    height: 260px;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 10px;
     margin-bottom: 15px;
+	transition: .4s;
+}
+
+.product-card:hover img,
+.product-item:hover img {
+    transform: scale(1.05);
 }
 
 .product-card h3, .product-item h3 {
@@ -481,7 +487,7 @@ ROOT COLOR VARIABLE
     top: 15px;
     left: 15px;
     background: #d62828;
-    color: #white;
+    color: #fff;
     padding: 4px 10px;
     font-size: 11px;
     font-weight: 700;
@@ -807,109 +813,30 @@ ROOT COLOR VARIABLE
 /*====================================================
                         FOOTER
 ====================================================*/
-.footer-new, .footer {
-    background: #2d3d22;
-    color: #fff;
-    padding: 60px 0 20px;
-}
-
-.footer-grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
-    gap: 40px;
-}
-
-.footer-section h4 {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
-    color: #d9f0b4;
-}
-
-.footer-section p,
-.footer-section li {
-    color: #ddd;
-    line-height: 1.8;
-    font-size: 14px;
-    margin-bottom: 10px;
-}
-
-/*====================================================
-    SỬA ĐỒNG BỘ: LOGO FOOTER & KHUNG THẺ TAG THƯƠNG HIỆU
-====================================================*/
-/* Định dạng riêng cho chiếc Logo thương hiệu đầu tiên */
-.footer-section img:first-child {
-    width: 110px !important;              /* Tăng nhẹ kích thước cho sắc nét */
-    height: auto !important;
-    background-color: #ffffff !important;    /* Tạo nền trắng sạch sẽ */
-    padding: 12px !important;             /* Khoảng đệm bên trong hộp tag */
-    border-radius: 12px !important;       /* Bo góc mềm mại, không bị lẹm mất chữ */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15) !important; /* Đổ bóng nhẹ tạo chiều sâu */
-    margin-bottom: 20px !important;       /* Khoảng cách rộng rãi với chữ phía dưới */
-    transition: all 0.3s ease !important;
-    display: inline-block !important;
-    user-select: none;
-}
-
-/* Hiệu ứng nhấc nhẹ sang xịn mịn khi Vy rê chuột vào logo */
-.footer-section img:first-child:hover {
-    transform: translateY(-3px) scale(1.03) !important;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.25) !important;
-}
-
-/* Giữ nguyên kích thước nhỏ gọn ban đầu cho ảnh đối tác Vận chuyển / Thanh toán */
-.footer-section img.payment-img,
-.footer-section img.shipping-img {
-    width: 100% !important;
-    max-width: 220px !important;
-    margin-top: 5px !important;
-    margin-bottom: 15px !important;
-    background: transparent !important;   /* Không bị dính khung trắng bọc ngoài */
-    padding: 0 !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-}
-
-.footer-section a {
-    color: #ddd;
-    transition: .3s;
-}
-
-.footer-section a:hover {
-    color: #9dc55b;
-}
-
-.social-icons, .footer-social, .social {
-    display: flex;
-    gap: 12px;
-    margin-top: 15px;
-}
-
-.social-icons a, .footer-social a, .social a {
-    width: 38px;
-    height: 38px;
+.payment-methods{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #5f7f33;
-    border-radius: 50%;
-    color: #fff;
+    gap: 18px;
+    flex-wrap: nowrap;   /* luôn nằm trên 1 hàng */
+    margin-top: 25px;
+}
+
+.payment-methods img{
+    width: 110px;
+    height: 70px;
+    object-fit: contain;
+    background: #fff;
+    border-radius: 10px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
     transition: .3s;
 }
 
-.social-icons a:hover, .footer-social a:hover, .social a:hover {
-    background: #white;
-    color: #35542d;
-}
-
-.footer-bottom {
-    margin-top: 40px;
-    border-top: 1px solid rgba(255,255,255,.1);
-    padding-top: 20px;
-    text-align: center;
-    font-size: 13px;
-    color: #aaa;
+.payment-methods img:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,.2);
 }
 
 /*====================================================
@@ -942,7 +869,8 @@ ROOT COLOR VARIABLE
                 PAGES DECORATION INTERIOR
 ====================================================*/
 /* Banner các trang con */
-.banner-page, .about-banner {
+.banner-page, 
+.about-banner {
     position: relative;
     width: 100%;
     height: 250px;
@@ -971,6 +899,7 @@ ROOT COLOR VARIABLE
 .banner-overlay h1 { font-size: 36px; margin-bottom: 8px; }
 .banner-overlay p { font-size: 14px; opacity: 0.8; }
 
+
 /* Trang About */
 .story-section { padding: 60px 0; }
 .story-grid, .about-grid {
@@ -979,7 +908,12 @@ ROOT COLOR VARIABLE
     gap: 50px;
     align-items: center;
 }
-.story-image img, .about-img img { border-radius: 12px; box-shadow: var(--shadow); }
+.story-image img, 
+.about-image img{
+    width:100%;
+    max-width:350px;     
+    border-radius:12px;
+}
 .story-content h2 { color: #35542d; margin-bottom: 15px; }
 .story-content p { color: #666; margin-bottom: 15px; }
 
@@ -2109,23 +2043,167 @@ a[href="products.html"]:hover {
 /*====================================================
     CSS DÀN HÀNG LOGO CHUYÊN NGHIỆP
 ====================================================*/
-.footer-logos .logo-grid {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important; /* Chia 4 cột */
-    gap: 8px !important;
-    margin-top: 10px !important;
+.footer{
+      background:#2f4723;
+    color:#fff;
 }
 
-.footer-logos .logo-grid img {
-    background: #ffffff !important; /* Nền trắng để logo nổi bật */
-    padding: 5px !important;
-    border-radius: 4px !important;
-    height: 30px !important;        /* Chiều cao đồng bộ */
-    width: 100% !important;
-    object-fit: contain !important; /* Giữ tỉ lệ logo chuẩn */
-    transition: 0.3s !important;
+.footer-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:60px;
 }
 
-.footer-logos .logo-grid img:hover {
-    transform: translateY(-3px) scale(1.05) !important;
+.footer-info{
+    flex:2;
+}
+
+.footer-info p{
+    font-size:18px;
+    line-height:1.9;
+    margin-bottom:18px;
+	color:#eee;
+}
+
+.footer-payment{
+    flex:1;
+    text-align:center;
+}
+
+.footer-payment h3{
+    margin-bottom:25px;
+    font-size:28px;
+    color:#e8f3b5;
+}
+
+.payment-list{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.payment-list img{
+    width:90px;
+    height:70px;
+    object-fit:contain;
+    background:#fff;
+    border:1px solid #8ea26b;
+    border-radius:8px;
+    padding:8px;
+}
+
+.footer hr{
+    margin:35px 0 20px;
+    border:none;
+    border-top:1px solid #cfd9c8;
+}
+
+.copyright{
+    text-align:center;
+    font-size:16px;
+	color:#ddd;
+}
+.about-cocoon{
+    width:100%;
+    padding:80px 20px;
+    background:#fff;
+}
+
+.about-container{
+    max-width:900px;      /* Chiều rộng nội dung */
+    margin:0 auto;        /* Căn giữa */
+    text-align:left;
+}
+
+.logo-cocoon{
+    display:block;
+    width:120px;
+    margin:0 auto 20px;
+}
+
+.about-container h2{
+    text-align:center;
+    font-size:48px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.about-meta{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    color:#777;
+    font-size:18px;
+    margin-bottom:40px;
+}
+
+.about-content{
+    font-size:17px;
+    line-height:1.9;
+    color:#444;
+}
+
+.about-content h3{
+    margin-top:35px;
+    margin-bottom:15px;
+    color:#35542d;
+}
+
+.about-content ul{
+    padding-left:25px;
+}
+
+.about-content li{
+    margin-bottom:10px;
+}
+
+.cocoon-text{
+    overflow: hidden;
+    transition: all .5s ease;
+}
+
+.cocoon-text.collapsed{
+    max-height: 0;
+}
+
+.cocoon-text.show{
+    max-height: 5000px;
+}
+
+.text-center{
+    text-align:center;
+    margin-top:35px;
+}
+
+.btn-readmore{
+    padding:12px 35px;
+    border:2px solid #4f6b2d;
+    background:#fff;
+    color:#4f6b2d;
+    border-radius:40px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.btn-readmore:hover{
+    background:#4f6b2d;
+    color:#fff;
+}
+.banner-overlay .breadcrumb a,
+.banner-overlay .breadcrumb a.active {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: #fff !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+.banner-overlay .breadcrumb span {
+    color: #fff;
+    margin: 0 8px;
 }
