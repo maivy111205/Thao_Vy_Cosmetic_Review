@@ -1,2 +1,3 @@
 # Thảo Vy Cosmetic Review 🍃
-# KOL cho thương hiệu mỹ phẩm thuần chay The Cocoon Original Vietnam
+# KOL thương hiệu mỹ phẩm thuần chay 
+# The Cocoon Original Vietnam - Uy tín, chính hãng
