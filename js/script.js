@@ -241,20 +241,42 @@ document.addEventListener("DOMContentLoaded", () => {
     const cartButtons = document.querySelectorAll(".cart-btn, .product-card button, .product-item button");
     cartButtons.forEach(button => {
         if (button.hasAttribute('disabled') || button.closest('.out-stock')) return;
+button.addEventListener("click", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
 
-        button.addEventListener("click", function (e) {
-            e.preventDefault();
-            e.stopPropagation();
+    const product = this.closest(".product-card, .product-item");
 
-            updateCartCount(1);
-            this.style.transform = "scale(.9)";
-            setTimeout(() => {
-                this.style.transform = "scale(1)";
-            }, 150);
+    const name = product.querySelector("h3").innerText;
+    const price = product.querySelector(".price").innerText;
+    const image = product.querySelector("img").src;
 
-            showToast("🛒 Đã thêm sản phẩm vào giỏ hàng!");
-        });
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+const index = cart.findIndex(item => item.name === name);
+
+if (index !== -1) {
+    cart[index].quantity++;
+} else {
+    cart.push({
+        name,
+        price,
+        image,
+        quantity: 1
     });
+}
+
+localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartCount(1);
+
+    this.style.transform = "scale(.9)";
+    setTimeout(() => {
+        this.style.transform = "scale(1)";
+    }, 150);
+
+    showToast("🛒 Đã thêm sản phẩm vào giỏ hàng!");
+	});
+  });
 
 
     const detailButtons = document.querySelectorAll(".btn, .btn-detail");
