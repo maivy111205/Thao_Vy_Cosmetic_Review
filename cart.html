@@ -223,75 +223,157 @@
 
 <script src="js/script.js"></script>
 <div id="toast"></div>
+
 <script>
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
+
     const badge = document.querySelector(".badge");
     const cartContainer = document.getElementById("cart-container");
-    const sampleItem = document.getElementById("sample-cart-item");
-    const btnMinus = document.querySelector(".btn-minus");
-    const btnPlus = document.querySelector(".btn-plus-qty");
-    const qtyVal = document.getElementById("sample-qty");
-    const btnDelete = document.getElementById("delete-sample-btn");
-    
-    const subtotalElem = document.getElementById("cart-subtotal");
-    const totalElem = document.getElementById("cart-total");
-    
-    const pricePerItem = 152000; 
+    const subtotal = document.getElementById("cart-subtotal");
+    const total = document.getElementById("cart-total");
 
-    function updateCartUI(quantity) {
-        if (quantity <= 0) {
-         
-            if (sampleItem) {
-                sampleItem.remove();
-            }
-            cartContainer.innerHTML = `<div style="text-align: center; padding: 40px 0; color: #777;">
-                                            <i class="fa-solid fa-basket-shopping" style="font-size: 48px; margin-bottom: 15px; color: #ccc;"></i>
-                                            <p style="font-size: 16px; font-weight: 500;">Giỏ hàng của bạn đang trống.</p>
-                                       </div>`;
-            if (badge) badge.textContent = "0";
-            if (subtotalElem) subtotalElem.textContent = "0đ";
-            if (totalElem) totalElem.textContent = "0đ";
-        } else {
-            if (badge) badge.textContent = quantity;
-            if (qtyVal) qtyVal.textContent = quantity;
-            
-            let totalAmount = quantity * pricePerItem;
-            let formattedPrice = totalAmount.toLocaleString('vi-VN') + "đ";
-            
-            if (subtotalElem) subtotalElem.textContent = formattedPrice;
-            if (totalElem) totalElem.textContent = formattedPrice;
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function renderCart() {
+
+        cartContainer.innerHTML = "";
+
+        if (cart.length === 0) {
+
+            cartContainer.innerHTML = `
+                <div style="text-align:center;padding:40px">
+                    <h3>🛒 Giỏ hàng trống</h3>
+                </div>
+            `;
+
+            subtotal.innerText = "0đ";
+            total.innerText = "0đ";
+
+            if (badge) badge.innerText = "0";
+
+            localStorage.setItem("cartCount", 0);
+
+            return;
         }
-    }
 
-    
-    let currentQty = parseInt(badge ? badge.textContent : "0");
-    updateCartUI(currentQty);
+        let grandTotal = 0;
+        let totalQty = 0;
 
-    if (btnPlus) {
-        btnPlus.addEventListener("click", function() {
-            currentQty++;
-            updateCartUI(currentQty);
+        cart.forEach((item, index) => {
+
+            const price = parseInt(item.price.replace(/[^\d]/g, ""));
+            const itemTotal = price * item.quantity;
+
+            grandTotal += itemTotal;
+            totalQty += item.quantity;
+
+            cartContainer.innerHTML += `
+            <div class="cart-item"
+                style="display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid #eee;">
+
+                <div style="display:flex;align-items:center;gap:15px;">
+
+                    <img src="${item.image}"
+                        style="width:80px;height:80px;object-fit:contain;border-radius:8px;">
+
+                    <div>
+
+                        <h3 style="font-size:16px;margin-bottom:5px;">
+                            ${item.name}
+                        </h3>
+
+                        <p style="color:#35542d;font-weight:bold;">
+                            ${item.price}
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div style="display:flex;align-items:center;gap:20px;">
+
+                    <div style="display:flex;border:1px solid #ddd;border-radius:5px;overflow:hidden;">
+
+                        <button class="minus"
+                            data-index="${index}"
+                            style="padding:5px 12px;border:none;background:#eee;cursor:pointer;">
+                            -
+                        </button>
+
+                        <span style="padding:5px 15px;">
+                            ${item.quantity}
+                        </span>
+
+                        <button class="plus"
+                            data-index="${index}"
+                            style="padding:5px 12px;border:none;background:#eee;cursor:pointer;">
+                            +
+                        </button>
+
+                    </div>
+
+                    <button class="delete"
+                        data-index="${index}"
+                        style="background:none;border:none;color:red;font-size:18px;cursor:pointer;">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+
+                </div>
+
+            </div>
+            `;
         });
+
+        subtotal.innerText = grandTotal.toLocaleString("vi-VN") + "đ";
+        total.innerText = grandTotal.toLocaleString("vi-VN") + "đ";
+
+        if (badge) badge.innerText = totalQty;
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        localStorage.setItem("cartCount", totalQty);
     }
 
-    if (btnMinus) {
-        btnMinus.addEventListener("click", function() {
-            if (currentQty > 1) {
-                currentQty--;
-                updateCartUI(currentQty);
+    renderCart();
+
+    document.addEventListener("click", function (e) {
+
+        if (e.target.closest(".plus")) {
+
+            const i = e.target.closest(".plus").dataset.index;
+
+            cart[i].quantity++;
+
+            renderCart();
+        }
+
+        if (e.target.closest(".minus")) {
+
+            const i = e.target.closest(".minus").dataset.index;
+
+            if (cart[i].quantity > 1) {
+
+                cart[i].quantity--;
+
             } else {
-                currentQty = 0;
-                updateCartUI(currentQty);
-            }
-        });
-    }
 
-    if (btnDelete) {
-        btnDelete.addEventListener("click", function() {
-            currentQty = 0;
-            updateCartUI(currentQty);
-        });
-    }
+                cart.splice(i, 1);
+
+            }
+
+            renderCart();
+        }
+
+        if (e.target.closest(".delete")) {
+
+            const i = e.target.closest(".delete").dataset.index;
+
+            cart.splice(i, 1);
+
+            renderCart();
+        }
+
+    });
+
 });
 
 document.getElementById('newsletterForm').addEventListener('submit', function(event) {

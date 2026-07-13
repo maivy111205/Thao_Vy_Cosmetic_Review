@@ -35,7 +35,8 @@
                 <img src="images/logo.png" alt="The Cocoon" class="logo-img">
                 <div class="logo-text">
 					 <h1><a href="index.html" style="text-decoration:none;color:inherit;">Thảo Vy Cosmetic Review 🍃</a></h1>
-						<p>KOL cho các thương hiệu mỹ phẩm uy tín – chính hãng</p>
+						<p>KOL thương hiệu mỹ phẩm thuần chay 
+						<br>The Cocoon Original Vietnam - Uy tín, chính hãng</p>
                 </div>
             </div>
 
@@ -149,59 +150,48 @@
 
           
             <div class="order-summary">
-                <h2>Đơn hàng</h2>
 
-                <div class="order-item">
-                    <span>Cà phê Đắk Lắk x1</span>
-                    <span>172.000đ</span>
-                </div>
+			<h2>Đơn hàng</h2>
 
-                <div class="order-item">
-                    <span>Gel rửa mặt x1</span>
-                    <span>299.000đ</span>
-                </div>
+			<div id="checkout-items"></div>
 
-                <hr style="margin: 15px 0; border: none; border-top: 1px solid #eee;">
+			<hr style="margin:15px 0;border:none;border-top:1px solid #eee;">
 
-                <div class="order-item">
-                    <span>Tạm tính</span>
-                    <span>471.000đ</span>
-                </div>
+			<div class="order-item">
+				<span>Tạm tính</span>
+				<span id="checkout-subtotal">0đ</span>
+			</div>
 
-                <div class="order-item">
-                    <span>Phí vận chuyển</span>
-                    <span>Miễn phí</span>
-                </div>
+			<div class="order-item">
+				<span>Phí vận chuyển</span>
+				<span>Miễn phí</span>
+			</div>
 
-                <hr style="margin: 15px 0; border: none; border-top: 2px solid #ddd;">
+			<hr style="margin:15px 0;border:none;border-top:2px solid #ddd;">
 
-                <div class="order-item" style="font-size: 18px; font-weight: 700; color: #5f7f33; padding: 15px 0;">
-                    <span>Tổng cộng</span>
-                    <span>471.000đ</span>
-                </div>
+			<div class="order-item"
+				style="font-size:18px;font-weight:700;color:#5f7f33;padding:15px 0;">
 
-                <button type="submit" form="orderForm" class="checkout-btn" style="width: 100%; border: none; text-align: center; cursor: pointer;">Đặt hàng</button>
-            </div>
+				<span>Tổng cộng</span>
+
+				<span id="checkout-total">0đ</span>
+
+			</div>
+
+			<button
+				type="submit"
+				form="orderForm"
+				class="checkout-btn"
+				style="width:100%;border:none;cursor:pointer;">
+
+				Đặt hàng
+
+			</button>
+
+		</div>
         </div>
     </div>
 </section>
-
-
-<section class="newsletter-section">
-    <div class="container">
-        <div class="newsletter-box">
-            <i class="fa-solid fa-envelope-open-text"></i>
-            <h2>ĐĂNG KÝ NHẬN ƯU ĐÃI</h2>
-            <p>Nhận ngay voucher và cập nhật những ưu đãi mới nhất</p>
-
-            <form class="newsletter-form">
-                <input type="email" placeholder="Nhập email của bạn" required>
-                <button type="submit">Đăng ký</button>
-            </form>
-        </div>
-    </div>
-</section>
-
 
 <section class="newsletter-section">
     <div class="container">
@@ -292,11 +282,60 @@
         <button onclick="closeModal()" style="margin-top:20px; width:100%; padding:10px; background:#35542d; color:#fff; border:none; border-radius:6px;">Đóng</button>
     </div>
 </div>
+
 <script>
+
+document.addEventListener("DOMContentLoaded",function(){
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const list = document.getElementById("checkout-items");
+
+    const subtotal = document.getElementById("checkout-subtotal");
+
+    const total = document.getElementById("checkout-total");
+
+    let money = 0;
+
+    cart.forEach(item=>{
+
+        const price = parseInt(item.price.replace(/[^\d]/g,""));
+
+        const itemTotal = price * item.quantity;
+
+        money += itemTotal;
+
+        list.innerHTML += `
+
+        <div class="order-item">
+
+            <span>${item.name} x${item.quantity}</span>
+
+            <span>${itemTotal.toLocaleString("vi-VN")}đ</span>
+
+        </div>
+
+        `;
+
+    });
+
+    subtotal.innerText = money.toLocaleString("vi-VN")+"đ";
+
+    total.innerText = money.toLocaleString("vi-VN")+"đ";
+
+});
+
 document.getElementById('newsletterForm').addEventListener('submit', function(event) {
+    
     event.preventDefault();
+
+    
     const messageDiv = document.getElementById('message');
+    
+  
     messageDiv.innerText = "Cảm ơn bạn! Bạn đã đăng ký thành công.";
+    
+   
     document.getElementById('emailInput').value = '';
 });
 </script>
