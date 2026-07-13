@@ -1062,16 +1062,15 @@ color: #35542d;
     padding: 80px 0; 
 }
 
-.success-box { 
-    max-width: 600px; 
-    margin: 0 auto; 
-    background: white; 
-    text-align: center; 
-    padding: 50px; 
+.success-box {
+    max-width: 1000px;   /* tăng chiều rộng */
+    margin: 0 auto;
+    background: white;
+    text-align: center;
+    padding: 50px;
     border-radius: 16px;
     box-shadow: var(--shadow);
 }
-
 .success-box i {
     font-size: 70px;
     color: #6d8b33;
@@ -1090,39 +1089,37 @@ color: #35542d;
     display: inline-block;
     margin: 15px 0; 
 }
-
-.success-buttons {
+.success-buttons{
     display: flex;
-    justify-content: center;
     gap: 20px;
-    margin-top: 20px;
-    /* Giới hạn độ rộng tối đa để các nút không bị quá dài trên màn hình lớn */
-    max-width: 450px; 
-    margin-left: auto;
-    margin-right: auto;
+    margin-top: 30px;
 }
 
-.success-btn {
-    flex: 1;              /* Hai nút sẽ tự chia đôi khoảng trống bằng nhau */
-    height: 45px;         /* Chiều cao cố định */
+.success-buttons .success-btn{
+    flex: 1;
     display: flex;
     justify-content: center;
-    align-items: center;  /* Căn chữ vào chính giữa chiều cao */
-    border-radius: 6px;
-    font-weight: 500;
-    text-decoration: none;
-    white-space: nowrap;  /* Không cho chữ xuống dòng */
-    padding: 0 15px;      /* Khoảng đệm nhẹ hai bên */
-}
+    align-items: center;
 
-.success-btn-home {
+    height: 70px;
+
     background: #35542d;
-    color: white; 
+    color: #fff;
+
+    border-radius: 10px;
+    text-decoration: none;
+
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,.15);
+    transition: all .3s ease;
 }
 
-.success-btn-shop {
-    background: #eee; 
-    color: #333; 
+.success-buttons .success-btn:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(0,0,0,.2);
 }
 
 #toast{
