@@ -2064,7 +2064,7 @@ a[href="products.html"]:hover {
     box-shadow: none !important;
 }
 
-
+/
 .nav-items li a.active,
 .nav-items li a:hover,
 .nav-items li.active a {
@@ -2423,4 +2423,67 @@ a[href="products.html"]:hover {
 
 .show {
     display: block; 
+}
+/* ========== BUTTON WRAPPER ========== */
+.button-wrapper {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+    margin: 30px auto;
+}
+
+.success-btn {
+    flex: 1;
+    padding: 16px 20px;
+    text-align: center;
+    color: #fff;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.success-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Nút Về trang chủ */
+.btn-home {
+    background: #35542d;
+}
+
+.btn-home:hover {
+    background: #5a7a2a;
+}
+
+/* Nút Tiếp tục mua sắm */
+.btn-shop {
+    background: #35542d;
+}
+
+.btn-shop:hover {
+    background: #5a7a2a;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 576px) {
+    .button-wrapper {
+        flex-direction: column;
+        gap: 15px;
+        max-width: 280px;
+    }
+    
+    .success-btn {
+        width: 100%;
+        padding: 14px;
+        font-size: 15px;
+    }
 }
