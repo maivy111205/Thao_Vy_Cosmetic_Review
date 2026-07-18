@@ -68,6 +68,21 @@
     </div>
 </header>
 
+<nav class="navbar-new">
+    <div class="container">
+        <ul class="nav-items">
+            <li><a href="index.html" class="active"><i class="fa-solid fa-home"></i> Trang chủ</a></li>
+            <li><a href="about.html">Thương hiệu</a></li>
+            <li><a href="products.html">Sản phẩm</a></li>
+            <li><a href="review.html">Review</a></li>
+            <li><a href="tips.html">Bí quyết<br> chăm sóc da</a></li>
+            <li><a href="news.html">Tin tức</a></li>
+            <li><a href="contact.html">Liên hệ</a></li>
+        </ul>
+    </div>
+</nav>
+
+
 <main>
     <div class="profile-card">
         <h1>Chào mừng bạn đã quay trở lại!</h1>
@@ -79,11 +94,12 @@
         </div>
 
         <div class="btn-group">
-
+    <!-- Nút Quay lại dùng class chính -->
     <button onclick="window.location.href='index.html'" class="btn-action">
         Quay lại trang chủ
     </button>
-
+    
+    <!-- Nút Đăng xuất dùng class chính + class bổ sung -->
     <button onclick="logout()" class="btn-action btn-logout">
         Đăng xuất
     </button>
@@ -92,31 +108,70 @@
 </main>
 
 <footer class="footer">
+
+    <div class="footer-top">
+
+        <div class="footer-info">
+
+            <p>
+                Website <b>Thảo Vy Cosmetic Review</b> thuộc quyền quản lý và vận hành bởi
+                <b>KOL Thảo Vy</b>. Giấy chứng nhận đăng ký kinh doanh số
+                <b>0309802418</b>, cấp ngày 13/07/2026 tại Sở Kế hoạch và Đầu tư TP. Hồ Chí Minh.
+            </p>
+
+            <p>
+                Thảo Vy Cosmetic Review chuyên cung cấp mỹ phẩm chính hãng,
+                được chọn lọc kỹ lưỡng từ các thương hiệu uy tín trong và ngoài nước.
+            </p>
+			
+			 <p>
+                Thảo Vy Cosmetic Review cam kết mang đến trải nghiệm mua sắm
+                minh bạch, tiện lợi và đáng tin cậy cho khách hàng.
+            </p>
+
+            <p>
+                Địa chỉ hoạt động:
+                624 Âu Cơ, Phường Bảy Hiền, Thành phố Hồ Chí Minh, Việt Nam.
+            </p>
+
+        </div>
+
+        <div class="footer-payment">
+
+            <h3>Phương thức thanh toán</h3>
+
+            <div class="payment-methods">
+				<img src="images/visa.png" alt="Visa">
+				<img src="images/mastercard.png" alt="MasterCard">
+				<img src="images/napas.png" alt="Napas">
+				<img src="images/momo.png" alt="MoMo">
+			</div>
+
+        </div>
+
+    </div>
+
+    <hr>
+
     <p class="copyright">
         © 2026 Thảo Vy Cosmetic Review. All Rights Reserved.
     </p>
-    <p>Thành phần thuần chay - Thân thiện môi trường.</p>
+	<p>Thành phần thuần chay - Thân thiện môi trường.
+	
+	</p>
+	
+
 </footer>
 
 <a href="#" class="back-top">
     <i class="fa-solid fa-arrow-up"></i>
 </a>
 
+<script src="js/script.js"></script>
 
-    <script src="js/script.js"></script> 
-	<script>
-document.addEventListener("DOMContentLoaded", () => {
-  
-    const nameDisplay = document.getElementById("userName");
-    const emailDisplay = document.getElementById("userEmail");
+<div id="toast"></div>
 
-    const savedName = localStorage.getItem("userName");
-    const savedEmail = localStorage.getItem("userEmail");
-
-    if (nameDisplay) nameDisplay.innerText = savedName || "Khách hàng thân thiết";
-    if (emailDisplay) emailDisplay.innerText = savedEmail || "user@example.com";
-});
-</script>
 
 </body>
+
 </html>

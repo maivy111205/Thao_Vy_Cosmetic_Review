@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Về chúng tôi | The Cocoon Original Vietnam</title>
+    <title>Thương hiệu | The Cocoon Original Vietnam</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -75,47 +75,32 @@
 
 <section class="banner-page">
     <img src="images/banner1.jpg" alt="About Banner">
-
     <div class="banner-overlay">
-        <h1>Về chúng tôi</h1>
-
+        <h1>Thương hiệu</h1>
+        
         <p class="breadcrumb">
             <a href="index.html">Trang chủ</a>
             <span>/</span>
 			<a href="about.html">Thương hiệu</a>
-            
+            <span></span>
         </p>
     </div>
 </section>
 
-<section style="background: #ffffff; padding: 80px 0; width: 100%; display: block;">
-    <div style="width: 95%; max-width: 1800px; margin: 0 auto; display: flex ; align-items: center; justify-content: space-between; gap: 50px; flex-wrap: wrap;">
-
-      
-        <div style="flex: 1; min-width: 350px; max-width: 450px; margin: 0 auto;">
-            <img src="images/about-home.jpg" alt="The Cocoon" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); display: block;">
+<section style="background: #ffffff; padding: 80px 0;">
+    <div class="container" style="display: flex; align-items: center; gap: 50px; flex-wrap: wrap;">
+        <!-- Ảnh giới thiệu -->
+        <div style="flex: 1; min-width: 350px;">
+            <img src="images/about-home.jpg" alt="The Cocoon" style="width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
         </div>
 
-<div style="flex: 1; min-width: 350px; display: flex; flex-direction: column; justify-content: center; text-align: left;"<>
-          
-			<p style="color: #666; margin-bottom: 30px; font-size: 50px; line-height: 1.8;"
-				</p>
+        <!-- Nội dung -->
+        <div style="flex: 1; min-width: 350px;">
             <div class="story-content">
                 <h2>Câu chuyện thương hiệu</h2>
-                <p>
-                      The Cocoon Original Vietnam là thương hiệu mỹ phẩm thuần chay nổi tiếng tại Việt Nam,
-					chuyên phát triển các sản phẩm chăm sóc da từ những nguyên liệu thiên nhiên như bí đao,
-					cà phê Đắk Lắk, hoa hồng và được phát triển với mong muốn đưa những nguyên liệu đặc trưng 
-					của Việt Nam vào các sản phẩm chăm sóc sắc đẹp an toàn và hiệu quả.
-                </p>
-                <p>
-					  Chúng tôi tin rằng vẻ đẹp đến từ thiên nhiên sẽ mang lại những giá trị bền vững. Vì vậy, 
-                    tất cả sản phẩm đều được nghiên cứu kỹ lưỡng, không thử nghiệm trên động vật, không chứa 
-                    thành phần có nguồn gốc động vật và thân thiện với môi trường.
-				</p>
-		
-
-                <a href="products.html" class="btn-explore">Khám phá sản phẩm →</a>
+                <p>The Cocoon Original Vietnam là thương hiệu mỹ phẩm thuần chay nổi tiếng tại Việt Nam, chuyên phát triển các sản phẩm chăm sóc da từ những nguyên liệu thiên nhiên như bí đao, cà phê Đắk Lắk, hoa hồng và được phát triển với mong muốn đưa những nguyên liệu đặc trưng của Việt Nam vào các sản phẩm chăm sóc sắc đẹp an toàn và hiệu quả.</p>
+                <p>Chúng tôi tin rằng vẻ đẹp đến từ thiên nhiên sẽ mang lại những giá trị bền vững. Vì vậy, tất cả sản phẩm đều được nghiên cứu kỹ lưỡng, không thử nghiệm trên động vật, không chứa thành phần có nguồn gốc động vật và thân thiện với môi trường.</p>
+                <a href="products.html" style="display:inline-block; margin-top:20px; padding:12px 25px; background:#35542d; color:#fff; border-radius:6px; text-decoration:none; font-weight:600;">Khám phá sản phẩm →</a>
             </div>
         </div>
     </div>
@@ -259,23 +244,6 @@
 
 <div id="toast"></div>
 
-<div id="productModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; justify-content:center; align-items:center;">
-    <div style="background:#fff; padding:30px; border-radius:12px; width:90%; max-width:500px; position:relative;">
-        <span onclick="closeModal()" style="position:absolute; top:10px; right:20px; cursor:pointer; font-size:24px;">&times;</span>
-        <img id="modalImg" src="" style="width:100%; height:200px; object-fit:contain;">
-        <h2 id="modalTitle" style="color:#35542d; margin:15px 0;"></h2>
-        <p id="modalDesc" style="color:#666;"></p>
-        <button onclick="closeModal()" style="margin-top:20px; width:100%; padding:10px; background:#35542d; color:#fff; border:none; border-radius:6px;">Đóng</button>
-    </div>
-</div>
-<script>
-document.getElementById('newsletterForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const messageDiv = document.getElementById('message');
-    messageDiv.innerText = "Cảm ơn bạn! Bạn đã đăng ký thành công.";
-    document.getElementById('emailInput').value = '';
-});
-</script>
 </body>
 
 </html>
