@@ -1,51 +1,281 @@
 console.log("File script.js đã được tải thành công!");
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
+
+    // 1. Hàm Toast thông báo chung
+
     function showToast(message) {
+
         const toastBox = document.getElementById("toast");
+
         if (!toastBox) return;
+
         const toast = document.createElement("div");
+
         toast.className = "toast";
+
         toast.innerHTML = message;
+
         toastBox.appendChild(toast);
+
         setTimeout(() => {
+
             toast.style.animation = "slideOut .4s forwards";
+
             setTimeout(() => toast.remove(), 400);
+
         }, 2500);
+
     }
+
     window.showToast = showToast;
 
+
+
+    // 2. Logic Account & Login
+
     const userText = document.getElementById("userAccountText");
+
     if (userText && localStorage.getItem("isLoggedIn") === "true") {
+
     userText.innerText = localStorage.getItem("userName") || "Tài khoản";
+
     }
-	
+
+   
+
     window.checkLogin = function() {
+
         if (localStorage.getItem("isLoggedIn") === "true") {
+
             window.location.href = "profile.html";
+
         } else {
+
             window.location.href = "login.html";
+
         }
+
     };
+
+
 
     window.logout = function() {
+
         localStorage.setItem("isLoggedIn", "false");
+
         window.location.href = "index.html";
+
     };
-    
+
+   
+
     const loginForm = document.getElementById("loginForm");
 
-	if (loginForm) {
-    loginForm.addEventListener("submit", function(e) {
+    loginForm?.addEventListener("submit", function(e) {
+
         e.preventDefault();
-		
-		const email = document.getElementById("emailInput").value;
-        const name = document.getElementById("nameInput").value;
-		localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("userEmail", email);
-        localStorage.setItem("userName", name);
-        window.location.href = "profile.html";
-        });
+
+
+
+        const nameValue = document.getElementById("nameInput").value;
+
+        const emailValue = document.getElementById("emailInput").value;
+
+
+
+        localStorage.setItem("isLoggedIn", "true");
+
+        localStorage.setItem("userName", nameValue);
+
+        localStorage.setItem("userEmail", emailValue);
+
+
+
+        const loginMessage = document.getElementById("loginMessage");
+
+        if(typeof showToast === "function") {
+
+            showToast("🎉 Đăng nhập thành công! Đang chuyển hướng...");
+
+        } else if (loginMessage) {
+
+            loginMessage.innerText = "🎉 Đăng nhập thành công! Đang chuyển hướng...";
+
+            loginMessage.style.color = "#35542d";
+
+        }
+
+
+
+        setTimeout(() => {
+
+            window.location.href = "profile.html";
+
+        }, 1500);
+
+    });
+
+
+
+    const registerForm = document.getElementById("registerForm");
+
+    registerForm?.addEventListener("submit", function(e) {
+
+        e.preventDefault();
+
+        const pass = document.getElementById("password").value;
+
+        const confirmPass = document.getElementById("confirmPassword").value;
+
+
+
+        if (pass !== confirmPass) {
+
+            if(typeof showToast === "function") {
+
+                showToast("⚠️ Mật khẩu xác nhận không trùng khớp!");
+
+            } else {
+
+                alert("⚠️ Mật khẩu xác nhận không trùng khớp!");
+
+            }
+
+            return;
+
+        }
+
+
+
+        if(typeof showToast === "function") {
+
+            showToast("🎉 Đăng ký tài khoản thành công! Vui lòng đăng nhập.");
+
+        } else {
+
+            alert("🎉 Đăng ký tài khoản thành công! Vui lòng đăng nhập.");
+
+        }
+
+        this.reset();
+
+    });
+
+
+
+    const commentForm = document.getElementById("commentForm");
+
+    commentForm?.addEventListener("submit", function(e) {
+
+        e.preventDefault();
+
+
+
+    const name = document.getElementById("reviewName")?.value || "Khách hàng";
+
+
+
+    if (typeof showToast === "function") {
+
+        showToast("🎉 Cảm ơn <b>" + name + "</b> đã gửi đánh giá!");
+
     }
+
+
+
+    this.reset();
+
+    });
+
+
+
+    const contactForm = document.getElementById("contactForm");
+
+    contactForm?.addEventListener("submit", function(e) {
+
+        e.preventDefault();
+
+        const nameInput = document.getElementById("contactName");
+
+        const name = nameInput ? nameInput.value : "bạn";
+
+        if (typeof showToast === "function") {
+
+        showToast("🎉 Cảm ơn " + name + "! Tin nhắn của bạn đã được gửi thành công.");
+
+    }
+
+        this.reset();
+
+    });
+
+
+
+    // 3. Logic Newsletter
+
+    const newsletter = document.querySelector(".newsletter-form");
+
+    if (newsletter) {
+
+        newsletter.addEventListener("submit", function (e) {
+
+            e.preventDefault();
+
+
+
+        // Lấy thẻ input email bên trong form này
+
+            const emailInput = this.querySelector("input[type='email']");
+
+
+
+        // 1. Kiểm tra nếu rỗng
+
+            if (!emailInput || emailInput.value.trim() === "") {
+
+                showToast("⚠️ Vui lòng nhập Email!");
+
+                emailInput?.focus();
+
+                return;
+
+        }
+
+
+
+        // 2. Xử lý khi đăng ký thành công
+
+        // Cập nhật text cho messageDiv nếu nó tồn tại trên trang
+
+        const messageDiv = document.getElementById('message');
+
+        if (messageDiv) {
+
+            messageDiv.innerText = "Cảm ơn bạn! Bạn đã đăng ký thành công.";
+
+        }
+
+
+
+        // Hiển thị thông báo Toast
+
+        showToast("🎉 Chúc mừng bạn đã đăng ký nhận ưu đãi thành công!");
+
+
+
+        // 3. Reset form
+
+        this.reset();
+
+        emailInput.blur();
+
+    });
+
+}
+
 
     const toggleBtn = document.getElementById("toggleBtn");
     const cocoonText = document.getElementById("cocoonText");
@@ -299,28 +529,8 @@ localStorage.setItem("cart", JSON.stringify(cart));
         });
     });
 
-		 const newsletter = document.querySelector(".newsletter-form");
-		if (newsletter) {
-			newsletter.addEventListener("submit", function (e) {
-				e.preventDefault();
-				const email = this.querySelector("input");
 
-				
-				if (!email || email.value.trim() === "") {
-					showToast("⚠️ Vui lòng nhập Email!");
-					email?.focus();
-					return;
-				}
-
-				showToast("🎉 Đăng ký nhận ưu đãi thành công!");
-				
-			
-				this.reset(); 
-				
-				
-				email.blur(); 
-			});
-		}
+    
     const gInput = document.getElementById("globalSearchInput");
     const gBtn = document.getElementById("globalSearchBtn");
 
@@ -1308,3 +1518,213 @@ localStorage.setItem("cart", JSON.stringify(cart));
 });
 
 
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const badge = document.querySelector(".badge");
+    const cartContainer = document.getElementById("cart-container");
+    const subtotal = document.getElementById("cart-subtotal");
+    const total = document.getElementById("cart-total");
+
+    if (cartContainer) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function renderCart() {
+
+        cartContainer.innerHTML = "";
+
+        if (cart.length === 0) {
+
+            cartContainer.innerHTML = `
+                <div style="text-align:center;padding:40px">
+                    <h3>🛒 Giỏ hàng trống</h3>
+                </div>
+            `;
+
+            subtotal.innerText = "0đ";
+            total.innerText = "0đ";
+
+            if (badge) badge.innerText = "0";
+
+            localStorage.setItem("cartCount", 0);
+
+            return;
+        }
+
+        let grandTotal = 0;
+        let totalQty = 0;
+
+        cart.forEach((item, index) => {
+
+            const price = parseInt(item.price.replace(/[^\d]/g, ""));
+            const itemTotal = price * item.quantity;
+
+            grandTotal += itemTotal;
+            totalQty += item.quantity;
+
+            cartContainer.innerHTML += `
+            <div class="cart-item"
+                style="display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid #eee;">
+
+                <div style="display:flex;align-items:center;gap:15px;">
+
+                    <img src="${item.image}"
+                        style="width:80px;height:80px;object-fit:contain;border-radius:8px;">
+
+                    <div>
+
+                        <h3 style="font-size:16px;margin-bottom:5px;">
+                            ${item.name}
+                        </h3>
+
+                        <p style="color:#35542d;font-weight:bold;">
+                            ${item.price}
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div style="display:flex;align-items:center;gap:20px;">
+
+                    <div style="display:flex;border:1px solid #ddd;border-radius:5px;overflow:hidden;">
+
+                        <button class="minus"
+                            data-index="${index}"
+                            style="padding:5px 12px;border:none;background:#eee;cursor:pointer;">
+                            -
+                        </button>
+
+                        <span style="padding:5px 15px;">
+                            ${item.quantity}
+                        </span>
+
+                        <button class="plus"
+                            data-index="${index}"
+                            style="padding:5px 12px;border:none;background:#eee;cursor:pointer;">
+                            +
+                        </button>
+
+                    </div>
+
+                    <button class="delete"
+                        data-index="${index}"
+                        style="background:none;border:none;color:red;font-size:18px;cursor:pointer;">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+
+                </div>
+
+            </div>
+            `;
+        });
+
+        subtotal.innerText = grandTotal.toLocaleString("vi-VN") + "đ";
+        total.innerText = grandTotal.toLocaleString("vi-VN") + "đ";
+
+        if (badge) badge.innerText = totalQty;
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        localStorage.setItem("cartCount", totalQty);
+    }
+
+    renderCart();
+
+    document.addEventListener("click", function (e) {
+
+        if (e.target.closest(".plus")) {
+
+            const i = e.target.closest(".plus").dataset.index;
+
+            cart[i].quantity++;
+
+            renderCart();
+        }
+
+        if (e.target.closest(".minus")) {
+
+            const i = e.target.closest(".minus").dataset.index;
+
+            if (cart[i].quantity > 1) {
+
+                cart[i].quantity--;
+
+            } else {
+
+                cart.splice(i, 1);
+
+            }
+
+            renderCart();
+        }
+
+        if (e.target.closest(".delete")) {
+
+            const i = e.target.closest(".delete").dataset.index;
+
+            cart.splice(i, 1);
+
+            renderCart();
+        }
+
+    });
+}
+
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  
+    const nameDisplay = document.getElementById("userName");
+    const emailDisplay = document.getElementById("userEmail");
+
+    const savedName = localStorage.getItem("userName");
+    const savedEmail = localStorage.getItem("userEmail");
+
+    if (nameDisplay) nameDisplay.innerText = savedName || "Khách hàng thân thiết";
+    if (emailDisplay) emailDisplay.innerText = savedEmail || "user@example.com";
+});
+
+document.addEventListener("DOMContentLoaded",function(){
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const list = document.getElementById("checkout-items");
+
+    const subtotal = document.getElementById("checkout-subtotal");
+
+    const total = document.getElementById("checkout-total");
+
+    let money = 0;
+
+    cart.forEach(item=>{
+
+        const price = parseInt(item.price.replace(/[^\d]/g,""));
+
+        const itemTotal = price * item.quantity;
+
+        money += itemTotal;
+
+        list.innerHTML += `
+
+        <div class="order-item">
+
+            <span>${item.name} x${item.quantity}</span>
+
+            <span>${itemTotal.toLocaleString("vi-VN")}đ</span>
+
+        </div>
+
+        `;
+
+    });
+
+    subtotal.innerText = money.toLocaleString("vi-VN")+"đ";
+
+    total.innerText = money.toLocaleString("vi-VN")+"đ";
+
+});
+
+    localStorage.removeItem("cartCount");
+    const badge = document.querySelector(".badge");
+    if(badge) badge.textContent = "0";
