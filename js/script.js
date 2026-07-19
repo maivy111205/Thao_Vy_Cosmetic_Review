@@ -4,7 +4,6 @@ console.log("File script.js đã được tải thành công!");
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    // 1. Hàm Toast thông báo chung
 
     function showToast(message) {
 
@@ -33,9 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
     window.showToast = showToast;
 
 
-
-    // 2. Logic Account & Login
-
     const userText = document.getElementById("userAccountText");
 
     if (userText && localStorage.getItem("isLoggedIn") === "true") {
@@ -44,7 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-   
 
     window.checkLogin = function() {
 
@@ -214,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-    // 3. Logic Newsletter
+
 
     const newsletter = document.querySelector(".newsletter-form");
 
@@ -224,9 +219,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             e.preventDefault();
 
-
-
-        // Lấy thẻ input email bên trong form này
 
             const emailInput = this.querySelector("input[type='email']");
 
@@ -246,10 +238,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-        // 2. Xử lý khi đăng ký thành công
-
-        // Cập nhật text cho messageDiv nếu nó tồn tại trên trang
-
         const messageDiv = document.getElementById('message');
 
         if (messageDiv) {
@@ -259,14 +247,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-
-        // Hiển thị thông báo Toast
-
         showToast("🎉 Chúc mừng bạn đã đăng ký nhận ưu đãi thành công!");
 
-
-
-        // 3. Reset form
 
         this.reset();
 
